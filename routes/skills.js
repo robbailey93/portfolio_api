@@ -7,7 +7,7 @@ const dummyProfile = {
 	_id: '12',
 	firstname: 'Rob',
 	lastname: 'Bailey',
-	page: 'profiles',
+	page: 'skills',
 };
 
 // TODO: Remove dummy response
