@@ -1,5 +1,11 @@
 var createError = require('http-errors');
-var express = require('express');
+
+require('dotenv').config();
+
+const express = require('express');
+const config = require('./config/config');
+const mongoose = require('mongoose');
+
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -14,6 +20,19 @@ let projectsRouter = require('./routes/projects');
 let skillsRouter = require('./routes/skills');
 let workExperienceRouter = require('./routes/work-experience');
 
+// Database setup
+const connection_string = config.database.buildConnectionString();
+
+mongoose
+	.connect(connection_string)
+	.then(() => {
+		console.log('Database connection successful.');
+	})
+	.catch(error => {
+		console.log('An error occurred connecting to the database. ', error);
+	});
+
+// Server Setup
 var app = express();
 
 // view engine setup
