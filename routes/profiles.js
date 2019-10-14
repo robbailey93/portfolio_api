@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
 		if (err) {
 			return res.json({
 				error: 'errormsg',
-				message: 'you dont kdjhfkdh',
+				message: 'There is an error in User/Profile',
 			});
 		}
 

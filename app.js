@@ -13,7 +13,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-let knowledgeBaseRouter = require('./routes/knowledge-base');
+let knowledgeBaseRouter = require('./routes/knowledge');
 let educationRouter = require('./routes/education');
 let profilesRouter = require('./routes/profiles');
 let projectsRouter = require('./routes/projects');
@@ -21,7 +21,6 @@ let skillsRouter = require('./routes/skills');
 let workExperienceRouter = require('./routes/work-experience');
 
 // Database setup
-const connection_string = config.database.buildConnectionString();
 
 mongoose
 	.connect(connection_string)
@@ -49,7 +48,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use('/education', educationRouter);
-app.use('/knowledge-base', knowledgeBaseRouter);
+app.use('/knowledge', knowledgeBaseRouter);
 app.use('/profiles', profilesRouter);
 app.use('/projects', projectsRouter);
 app.use('/skills', skillsRouter);
