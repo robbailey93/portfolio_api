@@ -3,15 +3,6 @@ const router = express.Router();
 const User = require('../models/user.js');
 
 // Define Post or Create route
-// router.post('/', (req, res, next) => {
-// 	const newUser = new User(req.body);
-// 	newUser.save(err => {
-// 		if (err) return res.status(500).send(err);
-// 		return res.status(200).send(newUser);
-// 	});
-// });
-
-// Define Post or Create route
 router.post('/', function(req, res) {
 	const newUser = new User(req.body);
 	newUser
@@ -38,23 +29,7 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-// Define Get or Read route / get by id
-// router.get('/:id', function(req, res, next) {
-// 	// should return users by id
-// 	User.find({ _id: req.params.id }, function(err, users) {
-// 		// have to provide a callback function due to it being async
-// 		if (err) {
-// 			return res.json({
-// 				error: 'errormsg',
-// 				message: 'There is an error in User/Profile get by id',
-// 			});
-// 			console.log(err);
-// 		}
-// 		res.json(users);
-// 	});
-// });
-
-// Define Edit route
+// Define Get or Read route get by ID for the edit
 router.get('/:id', function(req, res) {
 	let id = req.params.id;
 	User.findById(id, function(err, user) {
@@ -62,14 +37,15 @@ router.get('/:id', function(req, res) {
 	});
 });
 
+// Define Put or Update route get by ID
 router.put('/:id', function(req, res) {
 	User.findOneAndUpdate(
 		{ _id: req.params.id },
 		req.body,
+		// an option that asks mongoose to return the updated version
+		// of the document instead of the pre-updated one.
 		{ new: true },
-		// the callback function
 		(err, user) => {
-			// Handle any possible database errors
 			if (err) return res.status(500).send(err);
 			return res.status(200).send(user);
 		},
@@ -77,21 +53,12 @@ router.put('/:id', function(req, res) {
 });
 
 // Define Delete route
-// router.delete('/:id', function(req, res) {
-// 	User.findByIdAndRemove({ _id: req.params.id }, function(err, user) {
-// 		if (err) res.json(err);
-// 		else res.json('Successfully removed');
-// 	});
-// });
-
-// Define Delete route
 router.delete('/:id', function(req, res) {
-	User.findByIdAndDeleteOne(req.params.userId, (err, user) => {
-		// Handle any possible database errors
+	User.findOneAndRemove({ _id: req.params.id }, (err, user) => {
 		if (err) return res.status(500).send(err);
 		const response = {
 			message: 'User successfully deleted',
-			//id: User._id,
+			id: user._id,
 		};
 		return res.status(200).send(response);
 	});
