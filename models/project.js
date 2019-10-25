@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 // const timestamps = require('mongoose-timestamp');
 // look up timestamps
 
-const projects_schema = new Schema({
+const project_schema = new Schema({
 	// learn about constructor functions
 
 	project_name: {
@@ -34,5 +34,5 @@ const projects_schema = new Schema({
 
 // user_schema.plugin(timestamps);
 
-const Projects = mongoose.model('projects', projects_schema);
-model.exports = Projects;
+const Project = mongoose.model('project', project_schema);
+module.exports = Project;

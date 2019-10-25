@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 // const timestamps = require('mongoose-timestamp');
 // look up timestamps
 
-const skills_schema = new Schema({
+const skill_schema = new Schema({
 	// learn about constructor functions
 
 	skill_name: {
@@ -19,5 +19,5 @@ const skills_schema = new Schema({
 
 // user_schema.plugin(timestamps);
 
-const Skills = mongoose.model('skills', skills_schema);
-model.exports = Skills;
+const Skill = mongoose.model('skill', skill_schema);
+module.exports = Skill;

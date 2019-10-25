@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const Projects = require('../models/projects.js');
+const Projects = require('../models/project.js');
 
 //TODO: this is a dummy profile for API creation
 

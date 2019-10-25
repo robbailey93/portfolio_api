@@ -5,6 +5,7 @@ require('dotenv').config();
 const express = require('express');
 const config = require('./config/config');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -13,7 +14,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-let knowledgeBaseRouter = require('./routes/knowledge');
+let knowledgeBaseRouter = require('./routes/knowledge-base');
 let educationRouter = require('./routes/education');
 let profilesRouter = require('./routes/profiles');
 let projectsRouter = require('./routes/projects');
@@ -21,7 +22,7 @@ let skillsRouter = require('./routes/skills');
 let workExperienceRouter = require('./routes/work-experience');
 
 // Database setup
-
+const connection_string = config.database.buildConnectionString();
 mongoose
 	.connect(connection_string)
 	.then(() => {
@@ -44,11 +45,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(
+	cors({
+		origin: 'http://localhost:3000',
+	}),
+);
+
+// Routes
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 app.use('/education', educationRouter);
-app.use('/knowledge', knowledgeBaseRouter);
+app.use('/knowledge-base', knowledgeBaseRouter);
 app.use('/profiles', profilesRouter);
 app.use('/projects', projectsRouter);
 app.use('/skills', skillsRouter);

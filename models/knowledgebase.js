@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const knowledge_schema = new Schema({
+
+const knowledgebase_schema = new Schema({
 	term: {
 		type: String,
 		required: true,
@@ -15,5 +16,5 @@ const knowledge_schema = new Schema({
 	},
 });
 
-const Knowledge = mongoose.model('knowledge', knowledge_schema);
-model.exports = Knowledge;
+const Knowledgebase = mongoose.model('knowledgebase', knowledgebase_schema);
+module.exports = Knowledgebase;

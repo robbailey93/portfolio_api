@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const Skills = require('../models/skills.js');
+const Skills = require('../models/skill.js');
 
 router.get('/', function(req, res, next) {
 	// should return all users

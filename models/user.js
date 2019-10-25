@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 // const timestamps = require('mongoose-timestamp');
 // look up timestamps
 
-const user_schema = new Schema({
+// Define collection and schema for User
+let user_schema = new Schema({
 	// learn about constructor functions
 
 	first_name: {
@@ -19,20 +20,16 @@ const user_schema = new Schema({
 		type: String,
 		required: true,
 	},
-	// only one of these is required --email
-	phone: {
-		type: Number,
-		required: true,
-	},
-	// only one of these is required --phone
+	// only require--email or phone
 
-	bio: {
+	about: {
 		type: String,
 		required: true,
 	},
 });
 
 // user_schema.plugin(timestamps);
-
 const User = mongoose.model('user', user_schema);
-model.exports = User;
+module.exports = User;
+// found another syntax
+// module.exports = mongoose.model('user', User);

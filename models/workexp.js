@@ -32,4 +32,4 @@ const workexp_schema = new Schema({
 // user_schema.plugin(timestamps);
 
 const Workexp = mongoose.model('workexp', workexp_schema);
-model.exports = Workexp;
+module.exports = Workexp;

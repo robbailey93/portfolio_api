@@ -1,12 +1,9 @@
 var express = require('express');
 var router = express.Router();
-const Knowledge = require('../models/knowledge.js');
+const Knowledgebase = require('../models/knowledgebase.js');
 
 router.get('/', function(req, res, next) {
-	// should return all users
-	Knowledge.find({}, function(err, data) {
-		/// have to provide a callback function due to it being async
-
+	Knowledgebase.find({}, function(err, data) {
 		if (err) {
 			return res.json({
 				error: 'errormsg',
@@ -15,7 +12,6 @@ router.get('/', function(req, res, next) {
 		}
 
 		res.json(data);
-		// look at documentation
 	});
 });
 
