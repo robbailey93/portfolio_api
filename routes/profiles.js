@@ -62,93 +62,38 @@ router.get('/:id', function(req, res) {
 	});
 });
 
-//  Define Update route
-// router.put('/:id', function(req, res) {
-// 	User.findById(req.params.id, function(err, user) {
-// 		if (!user) res.status(404).send('data is not found');
-// 		else {
-// 			first_name = req.body.first_name;
-// 			last_name = req.body.last_name;
-// 			email = req.body.email;
-// 			about = req.body.about;
-
-// 			user.save()
-// 				.then(user => {
-// 					res.json('Update complete');
-// 				})
-// 				.catch(err => {
-// 					res.status(400).send('unable to update the database');
-// 				});
-// 		}
-// 	});
-// });
-
 router.put('/:id', function(req, res) {
-	User.updateOne(
+	User.findOneAndUpdate(
 		{ _id: req.params.id },
-		{
-			$set: {
-				first_name: req.body.first_name,
-				last_name: req.body.last_name,
-				email: req.body.email,
-				about: req.body.about,
-			},
+		req.body,
+		{ new: true },
+		// the callback function
+		(err, user) => {
+			// Handle any possible database errors
+			if (err) return res.status(500).send(err);
+			return res.status(200).send(user);
 		},
-		{ multi: true, new: true },
-	)
-		.then(docs => {
-			if (docs) {
-				resolve({ success: true, data: docs });
-			} else {
-				//reject({ success: false, data: 'no such user exist' });
-				console.log('failed');
-			}
-		})
-		.catch(err => {
-			//reject(err);
-		});
-
-	// User.updateOne(
-	// 	{ _id: req.params.id },
-	// 	{
-	// 		first_name: req.body.first_name,
-	// 		last_name: req.body.last_name,
-	// 		email: req.body.email,
-	// 		about: req.body.about,
-	// 	},
-	// );
-
-	// 	User.update({_id:id},{$set:{name:user.name,state:user.state}},{multi:true,new:true})
-	// 	.then((docs)=>{
-	// 	  if(docs) {
-	// 		resolve({success:true,data:docs});
-	// 	  } else {
-	// 		reject({success:false,data:"no such user exist"});
-	// 	  }
-	//    }).catch((err)=>{
-	// 	  reject(err);
-	//   })
-
-	// function(err, user) {
-	// 	if (!user) res.status(404).send('data is not found');
-	// 	else {
-
-	// 		user.save()
-	// 			.then(user => {
-	// 				res.json('Update complete');
-	// 			})
-	// 			.catch(err => {
-	// 				res.status(400).send('unable to update the database');
-	// 			});
-	// 	}
-	// });
+	);
 });
 
 // Define Delete route
+// router.delete('/:id', function(req, res) {
+// 	User.findByIdAndRemove({ _id: req.params.id }, function(err, user) {
+// 		if (err) res.json(err);
+// 		else res.json('Successfully removed');
+// 	});
+// });
+
+// Define Delete route
 router.delete('/:id', function(req, res) {
-	User.findByIdAndRemove({ _id: req.params.id }, function(err, user) {
-		if (err) res.json(err);
-		else res.json('Successfully removed');
+	User.findByIdAndDeleteOne(req.params.userId, (err, user) => {
+		// Handle any possible database errors
+		if (err) return res.status(500).send(err);
+		const response = {
+			message: 'User successfully deleted',
+			//id: User._id,
+		};
+		return res.status(200).send(response);
 	});
 });
 
