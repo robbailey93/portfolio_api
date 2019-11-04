@@ -35,7 +35,54 @@ router.get('/:id', function(req, res) {
 	User.findById(id, function(err, user) {
 		res.json(user);
 	});
+	// User.findOne(
+	// 	{
+	// 		first_name: id,
+	// 	},
+	// 	function(err, user) {
+	// 		res.json(user);
+	// 	},
+	// );
 });
+
+// set up other routes to get by first name, last name, email etc--look up monggose methods to grab by reference property
+
+// Define Get or Read route get by ID for the edit
+// router.get('/name/:id', function(req, res) {
+// 	let id = req.params.id;
+
+// 	User.findOne(
+// 		{
+// 			first_name: id,
+// 		},
+// 		function(err, user) {
+// 			res.json(user);
+// 		},
+// 	);
+// });
+
+// router.get('/name/:name/last/:last', function(req, res) {
+// 	let name = req.params.name;
+// 	let last = req.params.last;
+
+// 	User.findOne(
+// 		{
+// 			first_name: name,
+// 			last_name: last,
+// 		},
+// 		function(err, user) {
+// 			res.json(user);
+// 		},
+// 	);
+// });
+
+// Define Get or Read route get by ID for the edit
+// router.get('/:firstname/:lastname', function(req, res) {
+// 	let name = req.params.firstname;
+// 	User.findById(name, function(err, user) {
+// 		res.json(user);
+// 	});
+// });
 
 // Define Put or Update route get by ID
 router.put('/:id', function(req, res) {
